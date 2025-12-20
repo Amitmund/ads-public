@@ -4,8 +4,8 @@ window.ADS_CONFIG = {
   speed: 20, // seconds for one full scroll
   items: [
     {
-      image: "https://images.pexels.com/photos/18105/pexels-photo.jpg",
-      text: "Best Offer on Laptops",
+      image: "https://i.postimg.cc/gcCj9zQK/ganpati-motor-hero1.jpg",
+      text: "Get the best price on pre owned car at Raipur, CG.",
       width: 300,
       height: 180
     },
