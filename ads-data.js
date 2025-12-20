@@ -4,7 +4,7 @@ window.ADS_CONFIG = {
   speed: 20, // seconds for one full scroll
   items: [
     {
-      image: "https://images.pexels.com/photos/267371/pexels-photo-267371.jpeg",
+      image: "https://images.pexels.com/photos/18105/pexels-photo.jpg",
       text: "Best Offer on Laptops",
       width: 300,
       height: 180
