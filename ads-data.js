@@ -4,19 +4,19 @@ window.ADS_CONFIG = {
   speed: 20, // seconds for one full scroll
   items: [
     {
-      image: "https://via.placeholder.com/300x180?text=Ad+1",
+      image: "https://images.pexels.com/photos/267371/pexels-photo-267371.jpeg",
       text: "Best Offer on Laptops",
       width: 300,
       height: 180
     },
     {
-      image: "https://via.placeholder.com/250x150?text=Ad+2",
+      image: "https://images.pexels.com/photos/267371/pexels-photo-267371.jpeg",
       text: "New Smartphone Launch",
       width: 250,
       height: 150
     },
     {
-      image: "https://via.placeholder.com/200x200?text=Ad+3",
+      image: "https://images.pexels.com/photos/267371/pexels-photo-267371.jpeg",
       text: "Flat 50% Discount",
       width: 200,
       height: 200
