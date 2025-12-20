@@ -6,7 +6,7 @@ window.ADS_CONFIG = {
     {
       image: "https://i.postimg.cc/gcCj9zQK/ganpati-motor-hero1.jpg",
       text: "Get the best price on pre owned car at Raipur, CG.",
-      width: 300,
+      width: 150,
       height: 180
     },
     {
