@@ -24,7 +24,7 @@
 
       loadScript(
         // "https://cdn.jsdelivr.net/gh/amitmund/ads-public@main/ads-runtime.js"
-        "https://amitmund.github.io/ads-public/ads-gate.js"
+        "https://amitmund.github.io/ads-public/ads-runtime.js"
       );
     }
   );
