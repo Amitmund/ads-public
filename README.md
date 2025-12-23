@@ -22,3 +22,35 @@ my own ads-system details.
 
 # Result:
 - I have tested this one and works perfectly.
+
+# We are going with json file and nginx mapping, (where want to control caching):
+
+```
+server {
+    listen 443 ssl;
+    server_name ads.yourdomain.com;
+
+    root /var/www/ads-config;
+
+    location = /ads-domain-map.json {
+
+        # Serve file
+        default_type application/json;
+
+        # 🔥 STRONG no-cache policy
+        add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0" always;
+        add_header Pragma "no-cache" always;
+        add_header Expires "0" always;
+
+        # Allow revalidation
+        etag on;
+        if_modified_since exact;
+
+        # Security
+        add_header X-Content-Type-Options "nosniff" always;
+
+        # Logging (optional but useful)
+        access_log /var/log/nginx/ads-config-access.log;
+    }
+}
+```
