@@ -1,4 +1,4 @@
-// ads-data.js (V1 and its working. Don;t change for the newer version.)
+// ads-data.js (V1 and its working. Don;t change for the newer version.).
 
 window.ADS_CONFIG = {
   speed: 20, // seconds for one full scroll
