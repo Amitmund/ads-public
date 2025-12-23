@@ -1,4 +1,4 @@
-// ads-gallery.js
+// ads-gallery.js (V1 and its working. Don;t change for the newer version.)
 
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("ads");
