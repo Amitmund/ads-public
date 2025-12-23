@@ -11,6 +11,10 @@ window.ADS_DOMAIN_MAP = {
     enabled: true,
     adSet: "tech"
   },
+  "static-demo.sretoolkit.com": {
+    enabled: true,
+    adSet: "tech"
+  },
   "example.com": {
     enabled: false
   }
