@@ -11,7 +11,7 @@
 
   loadScript(
     // "https://cdn.jsdelivr.net/gh/YOUR_USERNAME/ads-public@main/ads-domain-map.js",
-    "https://amitmund.github.io/ads-public/ads-domain-map.js"
+    "https://amitmund.github.io/ads-public/ads-domain-map.js",
     () => {
       const config = window.ADS_DOMAIN_MAP?.[domain];
       if (!config || !config.enabled) return;
