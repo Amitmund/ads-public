@@ -17,6 +17,24 @@
 
       "startDate": "2025-01-01",
       "endDate": "2025-12-31"
+    },
+    {
+      "adId": "ad-002",
+      "advertiserId": "adv-aws",
+      "campaignId": "cmp-cloud-q4",
+
+      "image": "https://i.postimg.cc/Y05gb8tD/Screenshot-2025-11-14-at-4-15-26-PM.png",
+      "text": "Get the best learning at Bhawanipatna.",
+      "link": "https://shastrijishikshaniketan.org/",
+
+      "width": 300,
+      "height": 100,
+
+      "weight": 3,
+      "maxImpressionsPerUser": 5,
+
+      "startDate": "2025-01-01",
+      "endDate": "2025-12-31"
     }
   ]
 }
