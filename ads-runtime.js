@@ -17,7 +17,8 @@ async function loadAdsData() {
   if (window.ADS_DATA) return window.ADS_DATA;
 
   const res = await fetch(
-    "https://cdn.jsdelivr.net/gh/YOUR_USERNAME/ads-public@main/ads-data.json",
+    // "https://cdn.jsdelivr.net/gh/YOUR_USERNAME/ads-public@main/ads-data.json",
+    "https://amitmund.github.io/ads-public/ads-data.json",
     { cache: "force-cache" }
   );
 
