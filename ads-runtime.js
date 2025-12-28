@@ -8,11 +8,13 @@ function saveStore(data) {
   localStorage.setItem(STORE_KEY, JSON.stringify(data));
 }
 
+
 // Load Ads Data
 async function loadAdsData() {
   if (window.ADS_DATA) return window.ADS_DATA;
 
   const res = await fetch(
+    // "https://cdn.jsdelivr.net/gh/YOUR_USERNAME/ads-public@main/ads-data.json",
     "https://amitmund.github.io/ads-public/ads-data.json",
     { cache: "force-cache" }
   );
@@ -36,10 +38,18 @@ function canShow(ad) {
     (ad.maxImpressionsPerUser || Infinity);
 }
 
+
 // Weighted sorting for fairness
-function sortAdsByWeight(ads) {
-  return [...ads].sort((a, b) => (b.weight || 1) - (a.weight || 1));
+function pickAd(ads) {
+  const total = ads.reduce((s, a) => s + (a.weight || 1), 0);
+  let r = Math.random() * total;
+
+  for (const ad of ads) {
+    r -= ad.weight || 1;
+    if (r <= 0) return ad;
+  }
 }
+
 
 // Impression + Click Tracking
 function track(type, ad) {
@@ -49,19 +59,24 @@ function track(type, ad) {
   saveStore(store);
 
   navigator.sendBeacon(
-    "https://metrics.sretoolkit.com/ads",
+    "https://metrics.yoursite.com/ads",
     JSON.stringify({
       type,
       adId: ad.adId,
+      advertiserId: ad.advertiserId,
+      campaignId: ad.campaignId,
       domain: location.hostname,
       ts: Date.now()
     })
   );
 }
 
+
+// Render Ads
+
 async function initAds() {
   const slots = document.querySelectorAll(
-    '[data-ads-active="true"]'
+    '[data-ads-marquee][data-ads-active="true"]'
   );
   if (!slots.length) return;
 
@@ -75,66 +90,44 @@ async function initAds() {
       .filter(isActive)
       .filter(canShow);
 
-    if (!ads.length) {
-      slot.innerHTML = `<div style="text-align:center; padding:10px;">No ads available</div>`;
-      return;
-    }
+    if (!ads.length) return;
 
-    const sortedAds = sortAdsByWeight(ads);
+    const ad = pickAd(ads);
+    const img = document.createElement("img");
 
-    const container = document.createElement("div");
-    container.style.display = "flex";
-    container.style.gap = "10px";
+    img.src = ad.image;
+    img.alt = ad.text;
+    img.loading = "lazy";
+    img.width = ad.width;
+    img.height = ad.height;
 
-    if (slot.hasAttribute("data-ads-marquee")) {
-      container.style.animation = "ads-marquee 15s linear infinite";
-      container.style.whiteSpace = "nowrap";
-    } else {
-      container.style.justifyContent = "center";
-      container.style.flexWrap = "wrap";
-    }
+    const a = document.createElement("a");
+    a.href = ad.link;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer sponsored";
+    a.appendChild(img);
 
-    sortedAds.forEach((ad) => {
-      const adWrapper = document.createElement("div");
+    a.addEventListener("click", () => track("click", ad));
 
-      const img = document.createElement("img");
-      img.src = ad.image;
-      img.alt = ad.text;
-      img.width = ad.width;
-      img.height = ad.height;
-      img.loading = "lazy";
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          track("impression", ad);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
 
-      const a = document.createElement("a");
-      a.href = ad.link;
-      a.target = "_blank";
-      a.rel = "noopener noreferrer sponsored";
-      a.appendChild(img);
-      adWrapper.appendChild(a);
-
-      a.addEventListener("click", () => track("click", ad));
-
-      const io = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            track("impression", ad);
-            io.disconnect();
-          }
-        },
-        { threshold: 0.5 }
-      );
-
-      io.observe(adWrapper);
-      container.appendChild(adWrapper);
-    });
-
-    slot.appendChild(container);
+    slot.appendChild(a);
+    io.observe(a);
   });
 }
 
-// Mutation observer
 initAds();
 new MutationObserver(initAds).observe(document.body, {
   attributes: true,
   subtree: true,
   attributeFilter: ["data-ads-active"]
 });
+
