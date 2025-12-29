@@ -7,7 +7,7 @@ window.ADS_DOMAIN_MAP = {
     enabled: true,
     adSet: "tech"
   },
-  "padmaassociates.com": {
+  "www.padmaassociates.com": {
     enabled: true,
     adSet: "tech"
   },
